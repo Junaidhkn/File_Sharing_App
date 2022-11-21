@@ -1,0 +1,313 @@
+.input-container {
+   height: 400px;
+   width: 350px;
+   background-color: rgb(239, 227, 236);
+   border-radius: 0.75rem;
+   box-shadow: 9px 25px 56px -7px rgba(120, 102, 102, 0.93);
+   overflow-y: auto;
+}
+
+/* width */
+::-webkit-scrollbar {
+   width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+   box-shadow: inset 0 0 5px grey;
+   border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+   background: rgb(106, 103, 103);
+   border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+   background: #211f1f;
+}
+
+hr {
+   color: black;
+   height: 1px;
+   margin-bottom: 1rem;
+}
+
+.input {
+   width: 100%;
+   height: 8rem;
+   display: flex;
+   /* justify-content: ; */
+   align-items: center;
+   cursor: pointer;
+   position: relative;
+}
+
+.custom-uploader {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   cursor: pointer;
+   height: 8rem;
+   z-index: 10;
+   opacity: 0;
+}
+
+.file_data {
+   outline: 1px solid rgb(214, 142, 142);
+   height: 3rem;
+   padding-top: 17px;
+   padding-left: 15px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin: 1rem;
+}
+
+.upload-img {
+   width: 5rem;
+   height: 5rem;
+   margin-left: 3rem;
+   cursor: pointer;
+   position: absolute;
+   top: 25px;
+}
+
+.input-checker {
+   position: relative;
+}
+
+
+.slider.round {
+   border-radius: 34px;
+}
+
+.slider.round:before {
+   border-radius: 50%;
+}
+
+.upload-right {
+   margin-left: 9rem;
+}
+
+.readOnly-input {
+   display: flex
+}
+
+.title {
+   font-weight: 300;
+   font-size: 1.5rem;
+}
+
+.window-open-btn {
+   border: none;
+   background-color: rgb(239, 227, 236);
+   cursor: pointer;
+   color: rgb(66, 180, 209);
+   text-decoration: underline;
+   transition: color 0.2s ease-in-out;
+}
+
+
+.form-container {
+   display: flex;
+   flex-direction: column;
+   margin: 0rem 0.8rem;
+}
+
+
+.input-imp {
+   position: relative;
+}
+
+.inputReadOnly {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   position: relative;
+}
+
+.read-form-control {
+   outline: 2px solid black;
+   position: relative;
+   width: 100%;
+   padding: 10px 10px;
+   font-size: 16px;
+   color: rgb(26, 25, 25);
+   border: none;
+   border-bottom: 1px solid rgb(132, 132, 132);
+   outline: none;
+   background: transparent;
+   margin-bottom: 1rem;
+}
+
+.copy-link {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: rgb(113, 113, 113);
+   font-size: 12px;
+   cursor: pointer;
+   padding: 0.7rem;
+   position: absolute;
+   border: none;
+   border-radius: 0.5rem;
+   right: 0rem;
+   bottom: 1rem;
+}
+
+.copy-link:hover {
+   background-color: rgb(92, 106, 124);
+}
+
+.copy-link-img {
+   width: 1rem;
+   height: 1rem;
+   /* margin-left: 5px; */
+}
+
+.input-imp {
+   position: relative;
+   margin-top: 1rem;
+}
+
+.textField-input {
+   width: 100%;
+   padding: 10px 0;
+   font-size: 16px;
+   color: rgb(26, 25, 25);
+   border: none;
+   border-bottom: 1px solid rgb(132, 132, 132);
+   outline: none;
+   background: transparent;
+   /* margin-bottom: 2rem; */
+}
+
+.textField-label {
+   position: absolute;
+   top: 0;
+   left: 0;
+   padding: 20px 0;
+   font-size: 14px;
+   color: rgb(13, 12, 12);
+   transition: all .5s;
+}
+
+
+.textField-input:focus~label,
+.textField-input:valid~label,
+.textField-input:active~label {
+   position: absolute;
+   top: -20px;
+   left: 0;
+   color: #2b2b2b;
+   font-size: 10px;
+}
+
+/* .textField-input::not(:focus)~label {
+   display: none;
+} */
+
+.input-imp textarea {
+   width: 100%;
+   height: 4rem;
+   font-size: 16px;
+   resize: none;
+}
+
+.action-trigger {
+   display: flex;
+   justify-content: center;
+}
+
+.action-button {
+   background-color: rgba(10, 116, 146, 0.8);
+   cursor: pointer;
+   border: none;
+   color: #fff;
+   padding: .5rem 1.5rem;
+   border-radius: 3rem;
+   margin: 0.5rem;
+   font-size: 1.2rem;
+   font-family: 'Roboto', sans-serif;
+   transition: all 0.2s ease-in-out;
+}
+
+.action-button:hover {
+   background-color: rgb(10, 116, 146);
+}
+
+
+
+
+/* End of Section Left */
+/* -------------------------------- */
+/* Section Right */
+
+.main-section {
+   height: 80vh;
+   display: flex;
+}
+
+.input-container-main {
+   flex: 1;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.background {
+   flex: 2;
+   position: relative;
+   overflow: hidden;
+}
+
+.background-img {
+   width: 100%;
+   height: 100%;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+   border-radius: 1.8rem;
+   background: linear-gradient();
+   position: absolute;
+   left: 1.5rem;
+   opacity: 0.8;
+}
+
+.tagline {
+   position: absolute;
+   top: 120px;
+   left: 105px;
+   font-size: 4rem;
+   color: rgb(20, 37, 53);
+}
+
+.tagline-2 {
+   position: absolute;
+   color: rgb(20, 37, 53);
+   top: 340px;
+   left: 150px;
+}
+
+.tagline-3 {
+   position: absolute;
+   color: rgb(20, 37, 53);
+   top: 380px;
+   left: 160px;
+}
+
+.asterisk {
+   position: absolute;
+   color: red;
+   left: -9px;
+   top: -2px;
+}
+
+.sp {
+   display: block;
+}

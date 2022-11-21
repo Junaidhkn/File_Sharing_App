@@ -1,0 +1,16 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	padding: 0;
+	margin: 0;
+	background-color: rgb(224, 192, 150);
+}
+
+::selection {
+	background: rgb(197, 120, 156);
+}
