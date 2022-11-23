@@ -1,25 +1,44 @@
-import React from 'react'
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import backIMG from '../img/download-Background.jpg';
 import './Action.css';
 
-const Action = ({ fileName, fileSize }) => {
-   const downloadHandler= () => {}
+const Action = () => {
+	let id = '8a664b8c-e6b5-4935-aae5-ac497b6b7ce4';
+	const [link, setLink] = useState('');
+
+	const downloadData = async () => {
+		try {
+			await axios.get(`http://localhost:5000/files/download/${id}`);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
-      <div className="action">
-            <div className="download">
-                  <img className='image' src={backIMG} alt='download' />
-            </div>
-            <div className='container'>
-               <h2>Your file is ready to download</h2>
-               <p>Link expires in 24 hours</p>
-               <div className='downloadInfo'>
-                  <h4>{fileName}</h4>
-                  <small>{parseInt(fileSize / 1000)} KB</small>
-               </div>
-               <button onclick={downloadHandler} className='btn'>Download</button>
-            </div>
-      </div>
+		<div className='action'>
+			<div className='download'>
+				<img
+					className='image'
+					src={backIMG}
+					alt='download'
+				/>
+			</div>
+			<div className='container'>
+				<h2>Your file is ready to download</h2>
+				<p>Link expires in 24 hours</p>
+				<div className='downloadInfo'>
+					<h4>{link?.filename}</h4>
+					<small>{parseInt(link?.filename / 1000)} KB</small>
+				</div>
+				<button
+					onClick={downloadData}
+					className='btn'>
+					Download
+				</button>
+			</div>
+		</div>
 	);
 };
 
-export default Action
+export default Action;
