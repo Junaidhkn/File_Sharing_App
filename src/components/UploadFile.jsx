@@ -4,77 +4,45 @@ import addSvg from '../img/add.svg';
 import copy from '../img/copy.svg';
 import { useState } from 'react';
 import File from './File';
-import Axios from 'axios';
+import axios from "axios";
 
 const UploadFile = () => {
-	const [uFiles, setUFiles] = useState({});
-	const [emailTo, setEmailTo] = useState('');
-	const [emailFrom, setEmailFrom] = useState('');
-	const [title, setTitle] = useState('');
-	const [description, setDescription] = useState('');
+	const [uFiles, setUFiles] = useState( {} );
+	const [emailTo, setEmailTo] = useState( '' );
+	const [emailFrom, setEmailFrom] = useState( '' );
+	const [title, setTitle] = useState( '' );
+	const [description, setDescription] = useState( '' );
 
 	const copyHandler = () => {
-		var copyText = document.getElementById('myInput');
+		var copyText = document.getElementById( 'myInput' );
 		copyText.select();
-		copyText.setSelectionRange(0, 99999); /* For mobile devices */
-		navigator.clipboard.writeText(copyText.value);
+		copyText.setSelectionRange( 0, 99999 ); /* For mobile devices */
+		navigator.clipboard.writeText( copyText.value );
 	};
 
-	let formData = new FormData();
 
-	const fileUploadHandler = (e) => {
-		// const file = e.target.files[0];
-		// console.log(file);
-		// const options = {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Content-Type': 'multipart/form-data',
-		// 	},
-		// };
-		// options.body = formData;
-		// console.log(formData);
-		// fetch('http://localhost:5000/api/files/', options)
-		// 	.then((response) => response.json())
-		// 	.then((response) => console.log(response))
-		// 	.catch((err) => console.error(err));
-		// // .then((response) => response.json())
-		const form = new FormData();
-		form.append('file', e.target.files[0]);
-
+	const fileUploadHandler = ( e ) => {
 		const options = {
 			method: 'POST',
+			url: 'http://localhost:5000/api/files/',
 			headers: {
-				'Content-Type':
-					'multipart/form-data; boundary=---011000010111000001101001',
+				'Content-Type': 'multipart/form-data'
 			},
+			data: { file: e.target.files[0] }
 		};
 
-		options.body = form;
+		axios.request( options ).then( ( response ) => {
+			console.log( response.data );
+		} ).catch( ( error ) => {
+			console.error( error );
+		} );
+	}
 
-		fetch('http://localhost:5000/api/files/', options)
-			.then((response) => response.json())
-			.then((response) => console.log(response))
-			.catch((err) => console.error(err));
-		// console.log(e.target.files[0]);
-		// console.log(e.target.value);
-		// console.log(e.target.files[0].name);
-		// console.log(e);
-		// formData.append('file', e.target.files[0]);
-		// formData.append('path', e.target.value);
-		// formData.append('name', e.target.files[0].name);
-		// fetch('http://localhost:5000/api/files/', {
-		// 	method: 'POST',
-		// 	body: formData,
-		// })
-		// 	.then((response) => response.json())
-		// 	.then((response) => console.log(response))
-		// 	.catch((err) => console.error(err));
-	};
 	// setDescription('');
 	// setEmailFrom('');
 	// setEmailTo('');
 	// setTitle('');
-	const formSubmitHandler = (e) => {
+	const formSubmitHandler = ( e ) => {
 		e.preventDefault();
 		const emailData = {
 			uuid: 'e3c994cd-9b15-4a02-8aa8-a1f121f30609',
@@ -84,17 +52,17 @@ const UploadFile = () => {
 			description,
 		};
 
-		fetch('http://localhost:5000/api/files/send', {
+		fetch( 'http://localhost:5000/api/files/send', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(emailData),
-		}).then(() => {
-			console.log('Request sent!!');
-			setDescription('');
-			setEmailFrom('');
-			setEmailTo('');
-			setTitle('');
-		});
+			body: JSON.stringify( emailData ),
+		} ).then( () => {
+			console.log( 'Request sent!!' );
+			setDescription( '' );
+			setEmailFrom( '' );
+			setEmailTo( '' );
+			setTitle( '' );
+		} );
 	};
 
 	return (
@@ -160,8 +128,8 @@ const UploadFile = () => {
 									name='emailTo'
 									id='emailTo'
 									value={emailTo}
-									onChange={(e) => {
-										setEmailTo(e.target.value);
+									onChange={( e ) => {
+										setEmailTo( e.target.value );
 									}}
 									required
 								/>
@@ -178,8 +146,8 @@ const UploadFile = () => {
 									name='email'
 									id='email'
 									value={emailFrom}
-									onChange={(e) => {
-										setEmailFrom(e.target.value);
+									onChange={( e ) => {
+										setEmailFrom( e.target.value );
 									}}
 									required
 								/>
@@ -196,8 +164,8 @@ const UploadFile = () => {
 									name='title'
 									id='title'
 									value={title}
-									onChange={(e) => {
-										setTitle(e.target.value);
+									onChange={( e ) => {
+										setTitle( e.target.value );
 									}}
 									required
 								/>
@@ -214,8 +182,8 @@ const UploadFile = () => {
 									name='message'
 									id='message'
 									value={description}
-									onChange={(e) => {
-										setDescription(e.target.value);
+									onChange={( e ) => {
+										setDescription( e.target.value );
 									}}
 									required></textarea>
 								<label
