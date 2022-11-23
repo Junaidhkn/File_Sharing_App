@@ -96,7 +96,8 @@ const UploadFile = () => {
 					</div>
 					<hr />
 					<div className='file_data'>
-						<File file={uFiles} />
+						<p>sdfashdfdfd.png</p>
+						<p>12312kb</p>
 					</div>
 					<div className='inputReadOnly'>
 						<input
