@@ -5,6 +5,7 @@ import copy from '../img/copy.svg';
 import { useState } from 'react';
 import File from './File';
 import axios from "axios";
+import Loading from './Loading.jsx';
 
 const UploadFile = () => {
 	const [uFiles, setUFiles] = useState( {} );
@@ -64,7 +65,7 @@ const UploadFile = () => {
 			setTitle( '' );
 		} );
 	};
-
+	let loading = false
 	return (
 		<div className='main-section'>
 			<div className='input-container-main'>
@@ -95,10 +96,10 @@ const UploadFile = () => {
 						</div>
 					</div>
 					<hr />
-					<div className='file_data'>
+					{loading ? <Loading /> : <><div className='file_data'>
 						<p>sdfashdfdfd.png</p>
 						<p>12312kb</p>
-					</div>
+					</div></>}
 					<div className='inputReadOnly'>
 						<input
 							type='text'
