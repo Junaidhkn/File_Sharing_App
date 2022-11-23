@@ -3,47 +3,50 @@ import backgroundImg from '../img/img2.jpg';
 import addSvg from '../img/add.svg';
 import copy from '../img/copy.svg';
 import { useState } from 'react';
-import File from './File';
-import axios from "axios";
+import axios from 'axios';
 import Loading from './Loading.jsx';
+import { useFetch } from './useFetch.jsx';
 
 const UploadFile = () => {
-	const [uFiles, setUFiles] = useState( {} );
-	const [emailTo, setEmailTo] = useState( '' );
-	const [emailFrom, setEmailFrom] = useState( '' );
-	const [title, setTitle] = useState( '' );
-	const [description, setDescription] = useState( '' );
+	const [emailTo, setEmailTo] = useState('');
+	const [emailFrom, setEmailFrom] = useState('');
+	const [title, setTitle] = useState('');
+	const [description, setDescription] = useState('');
+
+	const { data, loading, error } = useFetch();
 
 	const copyHandler = () => {
-		var copyText = document.getElementById( 'myInput' );
+		var copyText = document.getElementById('myInput');
 		copyText.select();
-		copyText.setSelectionRange( 0, 99999 ); /* For mobile devices */
-		navigator.clipboard.writeText( copyText.value );
+		copyText.setSelectionRange(0, 99999); /* For mobile devices */
+		navigator.clipboard.writeText(copyText.value);
 	};
 
-
-	const fileUploadHandler = ( e ) => {
+	const fileUploadHandler = (e) => {
 		const options = {
 			method: 'POST',
 			url: 'http://localhost:5000/api/files/',
 			headers: {
-				'Content-Type': 'multipart/form-data'
+				'Content-Type': 'multipart/form-data',
 			},
-			data: { file: e.target.files[0] }
+			data: { file: e.target.files[0] },
 		};
 
-		axios.request( options ).then( ( response ) => {
-			console.log( response.data );
-		} ).catch( ( error ) => {
-			console.error( error );
-		} );
-	}
+		axios
+			.request(options)
+			.then((response) => {
+				console.log(response.data);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	};
 
 	// setDescription('');
 	// setEmailFrom('');
 	// setEmailTo('');
 	// setTitle('');
-	const formSubmitHandler = ( e ) => {
+	const formSubmitHandler = (e) => {
 		e.preventDefault();
 		const emailData = {
 			uuid: 'e3c994cd-9b15-4a02-8aa8-a1f121f30609',
@@ -53,19 +56,18 @@ const UploadFile = () => {
 			description,
 		};
 
-		fetch( 'http://localhost:5000/api/files/send', {
+		fetch('http://localhost:5000/api/files/send', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify( emailData ),
-		} ).then( () => {
-			console.log( 'Request sent!!' );
-			setDescription( '' );
-			setEmailFrom( '' );
-			setEmailTo( '' );
-			setTitle( '' );
-		} );
+			body: JSON.stringify(emailData),
+		}).then(() => {
+			console.log('Request sent!!');
+			setDescription('');
+			setEmailFrom('');
+			setEmailTo('');
+			setTitle('');
+		});
 	};
-	let loading = false
 	return (
 		<div className='main-section'>
 			<div className='input-container-main'>
@@ -96,10 +98,16 @@ const UploadFile = () => {
 						</div>
 					</div>
 					<hr />
-					{loading ? <Loading /> : <><div className='file_data'>
-						<p>sdfashdfdfd.png</p>
-						<p>12312kb</p>
-					</div></>}
+					{loading ? (
+						<Loading />
+					) : (
+						<>
+							<div className='file_data'>
+								<p>sdfashdfdfd.png</p>
+								<p>12312kb</p>
+							</div>
+						</>
+					)}
 					<div className='inputReadOnly'>
 						<input
 							type='text'
@@ -130,8 +138,8 @@ const UploadFile = () => {
 									name='emailTo'
 									id='emailTo'
 									value={emailTo}
-									onChange={( e ) => {
-										setEmailTo( e.target.value );
+									onChange={(e) => {
+										setEmailTo(e.target.value);
 									}}
 									required
 								/>
@@ -148,8 +156,8 @@ const UploadFile = () => {
 									name='email'
 									id='email'
 									value={emailFrom}
-									onChange={( e ) => {
-										setEmailFrom( e.target.value );
+									onChange={(e) => {
+										setEmailFrom(e.target.value);
 									}}
 									required
 								/>
@@ -166,8 +174,8 @@ const UploadFile = () => {
 									name='title'
 									id='title'
 									value={title}
-									onChange={( e ) => {
-										setTitle( e.target.value );
+									onChange={(e) => {
+										setTitle(e.target.value);
 									}}
 									required
 								/>
@@ -184,8 +192,8 @@ const UploadFile = () => {
 									name='message'
 									id='message'
 									value={description}
-									onChange={( e ) => {
-										setDescription( e.target.value );
+									onChange={(e) => {
+										setDescription(e.target.value);
 									}}
 									required></textarea>
 								<label
