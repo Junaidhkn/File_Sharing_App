@@ -12,8 +12,8 @@ const UploadFile = () => {
 	const [name, setName] = useState('');
 	const [size, setsize] = useState();
 	const [show, setShow] = useState(false);
-	const [emailTo, setEmailTo] = useState('');
-	const [emailFrom, setEmailFrom] = useState('');
+	const [emailto, setEmailTo] = useState('');
+	const [emailfrom, setEmailFrom] = useState('');
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
 
@@ -58,9 +58,9 @@ const UploadFile = () => {
 				'Content-Type': 'application/json',
 			},
 			data: {
-				uuid: { id },
-				emailTo,
-				emailFrom,
+				uuid: id,
+				emailto,
+				emailfrom,
 				title,
 				description,
 			},
@@ -146,7 +146,7 @@ const UploadFile = () => {
 									type='email'
 									name='emailto'
 									id='emailto'
-									value={emailTo}
+									value={emailto}
 									onChange={(e) => {
 										setEmailTo(e.target.value);
 									}}
@@ -164,7 +164,7 @@ const UploadFile = () => {
 									type='email'
 									name='emailfrom'
 									id='emailfrom'
-									value={emailFrom}
+									value={emailfrom}
 									onChange={(e) => {
 										setEmailFrom(e.target.value);
 									}}
