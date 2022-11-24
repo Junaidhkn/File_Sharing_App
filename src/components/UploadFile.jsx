@@ -8,12 +8,16 @@ import Loading from './Loading.jsx';
 import { useFetch } from './useFetch.jsx';
 
 const UploadFile = () => {
+	const [id, setId] = useState('');
+	const [name, setName] = useState('');
+	const [size, setsize] = useState();
+	const [show, setShow] = useState(false);
 	const [emailTo, setEmailTo] = useState('');
 	const [emailFrom, setEmailFrom] = useState('');
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
 
-	const { data, loading, error } = useFetch();
+	// const { data, loading, error } = useFetch();
 
 	const copyHandler = () => {
 		var copyText = document.getElementById('myInput');
@@ -35,38 +39,45 @@ const UploadFile = () => {
 		axios
 			.request(options)
 			.then((response) => {
-				console.log(response.data);
+				setId(response.data.id);
+				setName(response.data.name);
+				setsize(response.data.size);
+				setShow(true);
 			})
 			.catch((error) => {
 				console.error(error);
 			});
 	};
 
-	// setDescription('');
-	// setEmailFrom('');
-	// setEmailTo('');
-	// setTitle('');
 	const formSubmitHandler = (e) => {
 		e.preventDefault();
-		const emailData = {
-			uuid: 'e3c994cd-9b15-4a02-8aa8-a1f121f30609',
-			emailTo,
-			emailFrom,
-			title,
-			description,
+		const options = {
+			method: 'POST',
+			url: 'http://localhost:5000/api/files/send',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			data: {
+				uuid: { id },
+				emailTo,
+				emailFrom,
+				title,
+				description,
+			},
 		};
 
-		fetch('http://localhost:5000/api/files/send', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(emailData),
-		}).then(() => {
-			console.log('Request sent!!');
-			setDescription('');
-			setEmailFrom('');
-			setEmailTo('');
-			setTitle('');
-		});
+		axios
+			.request(options)
+			.then((response) => {
+				console.log(response.data);
+				setDescription('');
+				setEmailFrom('');
+				setEmailTo('');
+				setTitle('');
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 	};
 	return (
 		<div className='main-section'>
@@ -98,13 +109,11 @@ const UploadFile = () => {
 						</div>
 					</div>
 					<hr />
-					{loading ? (
-						<Loading />
-					) : (
+					{show && (
 						<>
 							<div className='file_data'>
-								<p>sdfashdfdfd.png</p>
-								<p>12312kb</p>
+								<p>{name}</p>
+								<p>{Math.floor(size / 1000)}KB</p>
 							</div>
 						</>
 					)}
@@ -135,8 +144,8 @@ const UploadFile = () => {
 								<input
 									className='textField-input'
 									type='email'
-									name='emailTo'
-									id='emailTo'
+									name='emailto'
+									id='emailto'
 									value={emailTo}
 									onChange={(e) => {
 										setEmailTo(e.target.value);
@@ -145,7 +154,7 @@ const UploadFile = () => {
 								/>
 								<label
 									className='textField-label'
-									htmlFor='emailTo'>
+									htmlFor='emailto'>
 									Email to
 								</label>
 							</div>
@@ -153,8 +162,8 @@ const UploadFile = () => {
 								<input
 									className='textField-input'
 									type='email'
-									name='email'
-									id='email'
+									name='emailfrom'
+									id='emailfrom'
 									value={emailFrom}
 									onChange={(e) => {
 										setEmailFrom(e.target.value);
@@ -163,7 +172,7 @@ const UploadFile = () => {
 								/>
 								<label
 									className='textField-label'
-									htmlFor='email'>
+									htmlFor='emailfrom'>
 									Your Email
 								</label>
 							</div>
@@ -189,8 +198,8 @@ const UploadFile = () => {
 								<textarea
 									className='textField-input'
 									type='text'
-									name='message'
-									id='message'
+									name='description'
+									id='description'
 									value={description}
 									onChange={(e) => {
 										setDescription(e.target.value);
@@ -198,7 +207,7 @@ const UploadFile = () => {
 									required></textarea>
 								<label
 									className='textField-label'
-									htmlFor='message'>
+									htmlFor='description'>
 									Message
 								</label>
 							</div>
