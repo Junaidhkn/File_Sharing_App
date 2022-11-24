@@ -2,10 +2,8 @@ import './UploadFile.css';
 import backgroundImg from '../img/img2.jpg';
 import addSvg from '../img/add.svg';
 import copy from '../img/copy.svg';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-import Loading from './Loading.jsx';
-
 const UploadFile = () => {
 	const [id, setId] = useState('');
 	const [name, setName] = useState('');

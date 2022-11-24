@@ -9,7 +9,7 @@ export const Fetch = ( id ) => {
 		const fetchData = async () => {
 			setLoading( true );
 			try {
-				const res = await axios.get( `http://localhost:5000/api/files/${id}` );
+				const res = await axios.get( `http://localhost:5000/files/download${id}` );
 				setData( res.data );
 			} catch ( error ) {
 				setError( error );
@@ -22,7 +22,7 @@ export const Fetch = ( id ) => {
 	const refetchData = async () => {
 		setLoading( true );
 		try {
-			const res = await axios.get( `http://localhost:5000/api/files/${id}` );
+			const res = await axios.get( `http://localhost:5000/files/download${id}` );
 			setData( res.data );
 		} catch ( error ) {
 			setError( error );
