@@ -1,16 +1,39 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import backIMG from '../img/download-Background.jpg';
 import './Action.css';
 
 const Action = () => {
-	// let id = '8a664b8c-e6b5-4935-aae5-ac497b6b7ce4';
-	// const [link, setLink] = useState('');
+	const [data, setData] = useState();
+	const params = useParams();
+	const id = params.id;
+	useEffect(() => {
+		const fetchData = async (id) => {
+			try {
+				const res = await axios.get(`http://localhost:5000/files/${id}`);
+				setData(res.data);
+			} catch (error) {
+				console.log(error);
+			}
+		};
 
+		fetchData(id);
+	}, [id]);
+
+	// const fetchData = async (id) => {
+	// 	try {
+	// 		const res = await axios.get(`http://localhost:5000/files/${id}`);
+	// 		setData(res.data);
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// };
+
+	console.log(data);
 	const downloadData = () => {
-		fetch(
-			'http://localhost:5000/files/download/8a664b8c-e6b5-4935-aae5-ac497b6b7ce4',
-		).then((response) => {
+		fetch(`http://localhost:5000/files/download/${id}`).then((response) => {
 			response.blob().then((blob) => {
 				let url = window.URL.createObjectURL(blob);
 				let a = document.createElement('a');
@@ -18,19 +41,9 @@ const Action = () => {
 				a.download = response.filename;
 				a.click();
 			});
-			//window.location.href = response.url;
+			// window.location.href = response.url;
 		});
 	};
-
-	// const downloadData = async () => {
-	// 	try {
-	// 		await axios.get(
-	// 			`http://localhost:5000/files/download/8a664b8c-e6b5-4935-aae5-ac497b6b7ce4`,
-	// 		);
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
 
 	return (
 		<div className='action'>
@@ -45,8 +58,8 @@ const Action = () => {
 				<h2>Your file is ready to download</h2>
 				<p>Link expires in 24 hours</p>
 				<div className='downloadInfo'>
-					{/* <h4>{link?.filename}</h4>
-					<small>{parseInt(link?.filename / 1000)} KB</small> */}
+					<h4>{data?.filename}</h4>
+					<small>{parseInt(data?.fileSize / 1000)} KB</small>
 				</div>
 				<button
 					onClick={downloadData}
