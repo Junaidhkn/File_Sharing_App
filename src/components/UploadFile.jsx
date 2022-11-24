@@ -2,10 +2,9 @@ import './UploadFile.css';
 import backgroundImg from '../img/img2.jpg';
 import addSvg from '../img/add.svg';
 import copy from '../img/copy.svg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Loading from './Loading.jsx';
-import { useFetch } from './useFetch.jsx';
 
 const UploadFile = () => {
 	const [id, setId] = useState('');
@@ -16,8 +15,9 @@ const UploadFile = () => {
 	const [emailfrom, setEmailFrom] = useState('');
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
-
-	// const { data, loading, error } = useFetch();
+	const [data, setData] = useState();
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(false);
 
 	const copyHandler = () => {
 		var copyText = document.getElementById('myInput');
@@ -43,12 +43,22 @@ const UploadFile = () => {
 				setName(response.data.name);
 				setsize(response.data.size);
 				setShow(true);
+				fetchData(response.data.id);
 			})
 			.catch((error) => {
 				console.error(error);
 			});
 	};
 
+	const fetchData = async (id) => {
+		setLoading(true);
+		try {
+			const res = await axios.get(`http://localhost:5000/files/${id}`);
+			setData(res.data.downloadLink);
+		} catch (error) {
+			setError(error);
+		}
+	};
 	const formSubmitHandler = (e) => {
 		e.preventDefault();
 		const options = {
@@ -74,6 +84,7 @@ const UploadFile = () => {
 				setEmailFrom('');
 				setEmailTo('');
 				setTitle('');
+				setLoading(false);
 			})
 			.catch((error) => {
 				console.error(error);
@@ -117,25 +128,27 @@ const UploadFile = () => {
 							</div>
 						</>
 					)}
-					<div className='inputReadOnly'>
-						<input
-							type='text'
-							value={'https://www.google.com'}
-							id='myInput'
-							className='read-form-control'
-							placeholder='Download Link'
-							readOnly
-						/>
-						<button
-							className='copy-link'
-							onClick={copyHandler}>
-							<img
-								className='copy-link-img'
-								src={copy}
-								alt='copy-link'
+					{loading && (
+						<div className='inputReadOnly'>
+							<input
+								type='text'
+								value={data ? data : ''}
+								id='myInput'
+								className='read-form-control'
+								placeholder='Download Link'
+								readOnly
 							/>
-						</button>
-					</div>
+							<button
+								className='copy-link'
+								onClick={copyHandler}>
+								<img
+									className='copy-link-img'
+									src={copy}
+									alt='copy-link'
+								/>
+							</button>
+						</div>
+					)}
 					<div className='form-container'>
 						<form
 							onSubmit={formSubmitHandler}
