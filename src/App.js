@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import * as dotenv from 'dotenv'
+// import * as dotenv from 'dotenv'
 import Home from './pages/Home';
 import DownloadPage from './pages/DownloadPage';
 
-dotenv.config()
+// dotenv.config()
 
 const App = () => {
 	return (

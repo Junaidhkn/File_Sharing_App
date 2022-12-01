@@ -27,7 +27,7 @@ const UploadFile = () => {
 	const fileUploadHandler = (e) => {
 		const options = {
 			method: 'POST',
-			url: 'http://localhost:5000/api/files/',
+			url: `${process.env.REACT_APP_API_URI}/api/files/`,
 			headers: {
 				'Content-Type': 'multipart/form-data',
 			},
@@ -51,7 +51,9 @@ const UploadFile = () => {
 	const fetchData = async (id) => {
 		setLoading(true);
 		try {
-			const res = await axios.get(`http://localhost:5000/files/${id}`);
+			const res = await axios.get(
+				`${process.env.REACT_APP_API_URI}/files/${id}`,
+			);
 			setData(res.data.downloadLink);
 		} catch (error) {
 			setError(error);
@@ -61,7 +63,7 @@ const UploadFile = () => {
 		e.preventDefault();
 		const options = {
 			method: 'POST',
-			url: 'http://localhost:5000/api/files/send',
+			url: `${process.env.REACT_APP_API_URI}/api/files/send`,
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -77,7 +79,7 @@ const UploadFile = () => {
 		axios
 			.request(options)
 			.then((response) => {
-				console.log(response.data);
+				// console.log(response.data);
 				setDescription('');
 				setEmailFrom('');
 				setEmailTo('');
