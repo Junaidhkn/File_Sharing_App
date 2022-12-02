@@ -5,26 +5,27 @@ import copy from '../img/copy.svg';
 import { useState } from 'react';
 import axios from 'axios';
 const UploadFile = () => {
-	const [id, setId] = useState('');
-	const [name, setName] = useState('');
+	const [id, setId] = useState( '' );
+	const [name, setName] = useState( '' );
 	const [size, setsize] = useState();
-	const [show, setShow] = useState(false);
-	const [emailto, setEmailTo] = useState('');
-	const [emailfrom, setEmailFrom] = useState('');
-	const [title, setTitle] = useState('');
-	const [description, setDescription] = useState('');
+	const [show, setShow] = useState( false );
+	const [emailto, setEmailTo] = useState( '' );
+	const [emailfrom, setEmailFrom] = useState( '' );
+	const [title, setTitle] = useState( '' );
+	const [description, setDescription] = useState( '' );
 	const [data, setData] = useState();
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(false);
+	const [loading, setLoading] = useState( false );
+	const [error, setError] = useState( false );
+	const [modalOpen, setModalOpen] = useState( false );
 
 	const copyHandler = () => {
-		var copyText = document.getElementById('myInput');
+		var copyText = document.getElementById( 'myInput' );
 		copyText.select();
-		copyText.setSelectionRange(0, 99999); /* For mobile devices */
-		navigator.clipboard.writeText(copyText.value);
+		copyText.setSelectionRange( 0, 99999 ); /* For mobile devices */
+		navigator.clipboard.writeText( copyText.value );
 	};
 
-	const fileUploadHandler = (e) => {
+	const fileUploadHandler = ( e ) => {
 		const options = {
 			method: 'POST',
 			url: `${process.env.REACT_APP_API_URI}/api/files/`,
@@ -35,31 +36,31 @@ const UploadFile = () => {
 		};
 
 		axios
-			.request(options)
-			.then((response) => {
-				setId(response.data.id);
-				setName(response.data.name);
-				setsize(response.data.size);
-				setShow(true);
-				fetchData(response.data.id);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+			.request( options )
+			.then( ( response ) => {
+				setId( response.data.id );
+				setName( response.data.name );
+				setsize( response.data.size );
+				setShow( true );
+				fetchData( response.data.id );
+			} )
+			.catch( ( error ) => {
+				console.error( error );
+			} );
 	};
 
-	const fetchData = async (id) => {
-		setLoading(true);
+	const fetchData = async ( id ) => {
+		setLoading( true );
 		try {
 			const res = await axios.get(
 				`${process.env.REACT_APP_API_URI}/files/${id}`,
 			);
-			setData(res.data.downloadLink);
-		} catch (error) {
-			setError(error);
+			setData( res.data.downloadLink );
+		} catch ( error ) {
+			setError( error );
 		}
 	};
-	const formSubmitHandler = (e) => {
+	const formSubmitHandler = ( e ) => {
 		e.preventDefault();
 		const options = {
 			method: 'POST',
@@ -77,19 +78,24 @@ const UploadFile = () => {
 		};
 
 		axios
-			.request(options)
-			.then((response) => {
+			.request( options )
+			.then( ( response ) => {
 				// console.log(response.data);
-				setDescription('');
-				setEmailFrom('');
-				setEmailTo('');
-				setTitle('');
-				setLoading(false);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+				setModalOpen( true )
+				setDescription( '' );
+				setEmailFrom( '' );
+				setEmailTo( '' );
+				setTitle( '' );
+				setLoading( false );
+			} )
+			.catch( ( error ) => {
+				console.error( error );
+			} );
 	};
+
+	const modalHandler = () => {
+		setModalOpen( false )
+	}
 	return (
 		<div className='main-section'>
 			<div className='input-container-main'>
@@ -124,7 +130,7 @@ const UploadFile = () => {
 						<>
 							<div className='file_data'>
 								<p>{name}</p>
-								<p>{Math.floor(size / 1000)}KB</p>
+								<p>{Math.floor( size / 1000 )}KB</p>
 							</div>
 						</>
 					)}
@@ -160,15 +166,15 @@ const UploadFile = () => {
 									name='emailto'
 									id='emailto'
 									value={emailto}
-									onChange={(e) => {
-										setEmailTo(e.target.value);
+									onChange={( e ) => {
+										setEmailTo( e.target.value );
 									}}
 									required
 								/>
 								<label
 									className='textField-label'
 									htmlFor='emailto'>
-									Email to
+									Email to :
 								</label>
 							</div>
 							<div className='input-imp'>
@@ -178,15 +184,15 @@ const UploadFile = () => {
 									name='emailfrom'
 									id='emailfrom'
 									value={emailfrom}
-									onChange={(e) => {
-										setEmailFrom(e.target.value);
+									onChange={( e ) => {
+										setEmailFrom( e.target.value );
 									}}
 									required
 								/>
 								<label
 									className='textField-label'
 									htmlFor='emailfrom'>
-									Your Email
+									Your Email :
 								</label>
 							</div>
 							<div className='input-imp'>
@@ -196,15 +202,15 @@ const UploadFile = () => {
 									name='title'
 									id='title'
 									value={title}
-									onChange={(e) => {
-										setTitle(e.target.value);
+									onChange={( e ) => {
+										setTitle( e.target.value );
 									}}
 									required
 								/>
 								<label
 									className='textField-label'
 									htmlFor='title'>
-									Title
+									Title :
 								</label>
 							</div>
 							<div className='input-imp'>
@@ -214,14 +220,14 @@ const UploadFile = () => {
 									name='description'
 									id='description'
 									value={description}
-									onChange={(e) => {
-										setDescription(e.target.value);
+									onChange={( e ) => {
+										setDescription( e.target.value );
 									}}
 									required></textarea>
 								<label
 									className='textField-label'
 									htmlFor='description'>
-									Message
+									Message :
 								</label>
 							</div>
 							<div className='action-trigger'>
@@ -251,6 +257,10 @@ const UploadFile = () => {
 					We don't store any file or information on our servers.
 				</p>
 			</div>
+			{modalOpen && emailto && <div className="modal">
+				<p className='modal_para'>Download link of the file has been sent to '{emailto}' via Email</p>
+				<button onClick={modalHandler} className="modal_btn">OK!</button>
+			</div>}
 		</div>
 	);
 };
