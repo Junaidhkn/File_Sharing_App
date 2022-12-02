@@ -352,4 +352,92 @@ hr {
 
 
 
-@media only screen and (max-width:600px) {}
+@media only screen and (max-width:320px) {
+   .background {
+      display: none;
+   }
+
+   .input-container {
+      max-width: 240px;
+   }
+}
+
+@media only screen and (min-width:321px) and (max-width:480px) and (max-height:700px) {
+   .text_background {
+      display: none;
+   }
+
+   .input-container {
+      max-width: 320px;
+      position: absolute;
+      z-index: 10;
+      left: 5%;
+      width: 320px;
+   }
+}
+
+@media only screen and (min-width:321px) and (max-width:480px) and (max-height:1000px) {
+   .text_background {
+      display: none;
+   }
+
+   .input-container {
+      max-height: 500px;
+      max-width: 320px;
+      position: absolute;
+      z-index: 10;
+      left: 5%;
+      width: 320px;
+   }
+}
+
+@media only screen and (min-width:480px) and (max-width:820px) and (max-height:1200px) {
+   .input-container {
+      height: 500px;
+      width: 480px;
+      position: absolute;
+      z-index: 10;
+      left: 5%;
+      width: 320px;
+   }
+
+   .background {
+      margin-top: 100px;
+      flex: 3;
+      height: 800px;
+      width: 600;
+   }
+
+   .tagline {
+      margin-top: 40px;
+      margin-left: 80px;
+      font-size: 45px;
+   }
+
+   .tagline-2 {
+      margin-top: 40px;
+      margin-left: 80px;
+      font-size: 28px;
+   }
+
+   .tagline-3 {
+      margin-top: 340px;
+      font-size: 18px;
+   }
+}
+
+@media only screen and (min-width:1600px) and (max-width:2400px) {
+   .input-container {
+      min-width: 550px;
+      max-height: 600px;
+   }
+
+   .action-trigger {
+      padding: 40px
+   }
+
+   .action-trigger button {
+      font-size: 28px;
+      padding: 10px 20px;
+   }
+}

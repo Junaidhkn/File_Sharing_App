@@ -248,14 +248,16 @@ const UploadFile = () => {
 					className='background-img'
 					alt='background-img'
 				/>
-				<h1 className='tagline'>
-					Transfer ideas.<span className='sp'>Transform the world.</span>
-				</h1>
-				<h2 className='tagline-2'>Share files upto 100MB with anyone.</h2>
-				<p className='tagline-3'>
-					<span className='asterisk'>*</span>
-					We don't store any file or information on our servers.
-				</p>
+				<div className="text_background">
+					<h1 className='tagline'>
+						Transfer ideas.<span className='sp'>Transform the world.</span>
+					</h1>
+					<h2 className='tagline-2'>Share files upto 100MB with anyone.</h2>
+					<p className='tagline-3'>
+						<span className='asterisk'>*</span>
+						We don't store any file or information on our servers.
+					</p>
+				</div>
 			</div>
 			{modalOpen && emailto && <div className="modal">
 				<p className='modal_para'>Download link of the file has been sent to '{emailto}' via Email</p>
