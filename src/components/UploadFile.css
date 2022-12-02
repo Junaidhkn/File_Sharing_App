@@ -1,5 +1,5 @@
 .input-container {
-   height: 400px;
+   height: 75vh;
    width: 350px;
    background-color: rgb(239, 227, 236);
    border-radius: 0.75rem;
@@ -182,19 +182,18 @@ hr {
 
 .textField-input {
    width: 100%;
-   padding: 10px 0;
+   padding: 15px 0;
    font-size: 16px;
    color: rgb(26, 25, 25);
    border: none;
    border-bottom: 1px solid rgb(132, 132, 132);
    outline: none;
    background: transparent;
-   /* margin-bottom: 2rem; */
 }
 
 .textField-label {
    position: absolute;
-   top: 0;
+   top: -20px;
    left: 0;
    padding: 20px 0;
    font-size: 14px;
@@ -204,11 +203,7 @@ hr {
 
 
 .textField-input:focus~label,
-.textField-input:valid~label,
 .textField-input:active~label {
-   position: absolute;
-   top: -20px;
-   left: 0;
    color: #2b2b2b;
    font-size: 10px;
 }
@@ -316,3 +311,45 @@ hr {
 .sp {
    display: block;
 }
+
+.modal {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   gap: 20px;
+   padding: 10px 35px;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   height: 200px;
+   width: 450px;
+   border: 1px solid red;
+   border-radius: 30px;
+   background-color: rgb(177, 207, 214);
+   z-index: 20;
+}
+
+.modal_para {
+   color: rgb(90, 97, 96);
+   font-size: 18px;
+}
+
+.modal_btn {
+   outline: none;
+   cursor: pointer;
+   padding: 10px 20px;
+   color: red;
+   border: 2px blue solid;
+   border-radius: 10px;
+   background-color: rgb(31, 38, 39);
+}
+
+
+
+/* Media Queries */
+
+
+
+@media only screen and (max-width:600px) {}
