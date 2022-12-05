@@ -86,6 +86,7 @@ const UploadFile = () => {
 				setEmailFrom( '' );
 				setEmailTo( '' );
 				setTitle( '' );
+				setShow( false );
 				setLoading( false );
 			} )
 			.catch( ( error ) => {
