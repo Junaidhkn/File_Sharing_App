@@ -82,11 +82,6 @@ const UploadFile = () => {
 			.then( ( response ) => {
 				// console.log(response.data);
 				setModalOpen( true )
-				setDescription( '' );
-				setEmailFrom( '' );
-				setEmailTo( '' );
-				setTitle( '' );
-				setShow( false );
 				setLoading( false );
 			} )
 			.catch( ( error ) => {
@@ -95,6 +90,11 @@ const UploadFile = () => {
 	};
 
 	const modalHandler = () => {
+		setDescription( '' );
+		setEmailFrom( '' );
+		setEmailTo( '' );
+		setTitle( '' );
+		setShow( false );
 		setModalOpen( false )
 	}
 	return (
